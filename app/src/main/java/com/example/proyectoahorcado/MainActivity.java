@@ -33,10 +33,10 @@ public class MainActivity extends AppCompatActivity {
 
     private final String[][] palabras = {
             {"CIVIL", "Construcciones"},
-            {"ROBOTICA", "Automatización"},
-            {"INDUSTRIAL", "Procesos"},
+            {"ROBOTICA", "Robots"},
+            {"INDUSTRIAL", "Fabricas"},
             {"SISTEMAS", "Computadoras"},
-            {"MANUFACTURA", "Producción"},
+            {"MANUFACTURA", "Elaboración"},
             {"ELECTRONICA", "Circuitos"},
             {"GESTION", "Administración"},
             {"NEGOCIOS", "Comercio"},
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         TextView titleTextView = findViewById(R.id.titleTextView);
         titleTextView.setVisibility(View.VISIBLE);
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         soundWin = MediaPlayer.create(this, R.raw.win);
         soundLose = MediaPlayer.create(this, R.raw.lose);
 
+        startTime = System.currentTimeMillis();
         // Iniciar el juego y crear teclado
         iniciarJuego();
         createKeyboard();
@@ -79,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         errors = 0;
         updateHangmanImage();
         loadRandomWord();
-        startTime = System.currentTimeMillis();
         hangmanImage.setEnabled(true);
     }
 
@@ -172,7 +173,12 @@ public class MainActivity extends AppCompatActivity {
             }
             hangmanImage.setEnabled(false);
         } else if (errors >= 6) {
+            soundLose.start();
+
+            long elapsedTime = System.currentTimeMillis() - startTime;
+
             Intent intent = new Intent(this, MainActivity4.class);
+            intent.putExtra("elapsedTime", elapsedTime);
             startActivity(intent);
             finish();
         }

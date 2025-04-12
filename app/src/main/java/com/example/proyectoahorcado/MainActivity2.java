@@ -35,9 +35,8 @@ public class MainActivity2 extends AppCompatActivity {
         checkBoxNoMostrar = findViewById(R.id.checkBoxNoMostrar);
         Button startGameButton = findViewById(R.id.startGameButton);
 
-        // Definir las reglas del juego
+
         rulesTextView.setText(
-                "Reglas del Juego del Ahorcado:\n\n" +
                         "1. Se te mostrará una palabra oculta.\n" +
                         "2. Debes adivinarla letra por letra.\n" +
                         "3. Cada intento fallido dibuja una parte del ahorcado.\n" +
